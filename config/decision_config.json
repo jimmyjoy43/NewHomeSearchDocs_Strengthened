@@ -1,0 +1,44 @@
+{
+  "search_anchor_date": "2026-03-21",
+  "target_move_in_date": "2026-04-20",
+  "default_weights": {
+    "quiet_score": 0.3,
+    "management_score": 0.25,
+    "amenity_score": 0.15,
+    "community_stability_score": 0.15,
+    "location_fit_score": 0.1,
+    "pricing_transparency_score": 0.05
+  },
+  "utility_map": {
+    "1": 0.0,
+    "2": 0.25,
+    "3": 0.55,
+    "4": 0.8,
+    "5": 1.0
+  },
+  "confidence_penalty": {
+    "high": 0.0,
+    "medium": 0.05,
+    "low": 0.12,
+    "unknown": 0.15,
+    "": 0.15
+  },
+  "hard_stop_rules": {
+    "management_score_lte": 1,
+    "quiet_score_lte": 2,
+    "approval_speed_business_days_gt": 7,
+    "security_risk_equals": "high",
+    "missing_essential_amenity_blocks_tour": true
+  },
+  "status_values": [
+    "candidate",
+    "screened",
+    "research_complete",
+    "tour_candidate",
+    "toured",
+    "backup",
+    "finalist",
+    "rejected",
+    "leased"
+  ]
+}

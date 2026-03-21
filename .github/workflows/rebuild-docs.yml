@@ -1,0 +1,39 @@
+name: rebuild-docs
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'data/**'
+      - 'config/decision_config.json'
+      - 'scripts/compute_scores.py'
+      - 'scripts/generate_markdown_reports.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Validate data
+        run: python scripts/validate_data.py
+      - name: Compute scores
+        run: python scripts/compute_scores.py
+      - name: Rebuild docs
+        run: python scripts/generate_markdown_reports.py
+      - name: Commit regenerated docs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/buildings.csv docs/02_neighborhood_breadth_scan.md docs/07_decision_log.md docs/10_unit_comparison.md
+          git diff --cached --quiet || git commit -m 'Rebuild reports [skip ci]'
+          git push

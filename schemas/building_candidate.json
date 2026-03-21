@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BuildingCandidateRow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["building_id", "building_name", "address", "neighborhood", "status", "last_updated"],
+  "properties": {
+    "building_id": {"type": "string"},
+    "building_name": {"type": "string"},
+    "address": {"type": "string"},
+    "neighborhood": {"type": "string"},
+    "source_url": {"type": "string"},
+    "management_company": {"type": "string"},
+    "building_class": {"type": "string"},
+    "cat_friendly": {"enum": ["yes", "no", "unknown", ""]},
+    "controlled_access": {"enum": ["yes", "no", "unknown", ""]},
+    "gym": {"enum": ["yes", "no", "unknown", ""]},
+    "pool": {"enum": ["yes", "no", "unknown", ""]},
+    "coworking": {"enum": ["yes", "no", "unknown", ""]},
+    "conference_room": {"enum": ["yes", "no", "unknown", ""]},
+    "ev_charging": {"enum": ["yes", "no", "unknown", ""]},
+    "rooftop": {"enum": ["yes", "no", "unknown", ""]},
+    "location_fit_score": {"type": "string"},
+    "pricing_transparency_score": {"type": "string"},
+    "status": {"type": "string"},
+    "notes": {"type": "string"},
+    "last_updated": {"type": "string"}
+  }
+}

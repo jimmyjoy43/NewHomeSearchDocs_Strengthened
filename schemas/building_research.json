@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BuildingResearchPayload",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["building_row", "evidence_rows", "packet_markdown"],
+  "properties": {
+    "building_row": {"type": "object"},
+    "evidence_rows": {
+      "type": "array",
+      "items": {"type": "object"}
+    },
+    "packet_markdown": {"type": "string"}
+  }
+}
