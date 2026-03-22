@@ -5,7 +5,7 @@ Edit the CSV, not this markdown.
 
 <!-- AUTO-GENERATED: do not edit below this line -->
 
-_Last regenerated: 2026-03-21_
+_Last regenerated: 2026-03-22_
 
 | Date | Building | Decision | Reason | Next action |
 |---|---|---|---|---|
