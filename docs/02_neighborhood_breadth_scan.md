@@ -13,7 +13,7 @@ Status meanings:
 
 <!-- AUTO-GENERATED: do not edit below this line -->
 
-_Last regenerated: 2026-03-25_
+_Last regenerated: 2026-03-26_
 
 | Building | Neighborhood | Status | Hard stop | Quiet | Mgmt | Community | Overall fit | Unknowns | Notes |
 |---|---|---|---|---|---|---|---|---|---|
