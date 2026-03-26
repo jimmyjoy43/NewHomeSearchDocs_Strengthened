@@ -4,7 +4,7 @@ Generated from `data/units.csv` and `data/buildings.csv`.
 
 <!-- AUTO-GENERATED: do not edit below this line -->
 
-_Last regenerated: 2026-03-22. Sorted by true monthly cost ascending._
+_Last regenerated: 2026-03-25. Sorted by true monthly cost ascending._
 
 | Building | Unit | Beds | Baths | sqft | Base rent | Net effective | True monthly cost | Available | Tour status | Building status |
 |---|---|---|---|---|---|---|---|---|---|---|
