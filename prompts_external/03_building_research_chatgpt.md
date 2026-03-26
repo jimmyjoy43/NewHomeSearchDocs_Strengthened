@@ -1,6 +1,6 @@
 # Stage 3 External Prompt: Deep Building Research (ChatGPT + Web Search)
 
-**Model:** o3 or o4-mini, heavy thinking, web search ON  
+**Model:** o3 or o4-mini, heavy thinking, web search ON
 **Attach:** `data/buildings.csv`
 
 ---
