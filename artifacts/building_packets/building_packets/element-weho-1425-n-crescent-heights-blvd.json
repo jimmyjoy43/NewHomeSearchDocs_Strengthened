@@ -1,0 +1,62 @@
+{
+  "building_row": {
+    "building_id": "element-weho-1425-n-crescent-heights-blvd",
+    "management_company": "Moss & Company",
+    "quiet_score": "3",
+    "quiet_confidence": "low",
+    "quiet_evidence_count": "1",
+    "management_score": "3",
+    "management_confidence": "low",
+    "management_evidence_count": "1",
+    "amenity_score": "4",
+    "amenity_confidence": "medium",
+    "amenity_evidence_count": "2",
+    "community_stability_score": "3",
+    "community_stability_confidence": "low",
+    "community_stability_evidence_count": "1",
+    "location_fit_score": "5",
+    "pricing_transparency_score": "3",
+    "approval_speed_business_days": "",
+    "structural_noise_risk": "unknown",
+    "location_noise_risk": "medium",
+    "security_risk": "low",
+    "pricing_risk": "medium",
+    "status": "research_complete",
+    "review_scan_done": "yes",
+    "deep_research_done": "yes",
+    "open_questions": "Verify postal code, rooftop presence, and exact package-handling process after hours. Confirm EV charging and rooftop access or equivalent outdoor workspace amenity.",
+    "notes": "Research complete, but still evidence-thin. West Hollywood fit is strong and the essentials largely appear present, yet EV charging, rooftop utility, and after-hours package handling remain unresolved in visible public materials.",
+    "last_updated": "2026-03-22"
+  },
+  "evidence_rows": [
+    {
+      "evidence_id": "",
+      "scope_type": "building",
+      "scope_id": "element-weho-1425-n-crescent-heights-blvd",
+      "criterion": "amenities",
+      "claim": "Official materials and the repo note support package concierge, controlled access, pool, gym, garage parking, and pets welcome.",
+      "source_type": "official",
+      "source_name": "Element WeHo official site",
+      "source_url": "https://www.elementweho.com/",
+      "retrieved_date": "2026-03-22",
+      "evidence_class": "confirmed",
+      "sentiment": "positive",
+      "quote_or_note": "Current official materials support package concierge, controlled access, pool, gym, garage parking, and pet-friendly terms."
+    },
+    {
+      "evidence_id": "",
+      "scope_type": "building",
+      "scope_id": "element-weho-1425-n-crescent-heights-blvd",
+      "criterion": "amenities",
+      "claim": "Apartments.com and Zillow both continue to show in-unit washer/dryer and active inventory.",
+      "source_type": "review",
+      "source_name": "Apartments.com",
+      "source_url": "https://www.apartments.com/element-weho-west-hollywood-ca/wn8k8ek/",
+      "retrieved_date": "2026-03-22",
+      "evidence_class": "confirmed",
+      "sentiment": "positive",
+      "quote_or_note": "Third-party listings show active inventory and in-unit washer/dryer."
+    }
+  ],
+  "packet_markdown": "# Element WeHo building packet\n\n## Snapshot\n- Building ID: element-weho-1425-n-crescent-heights-blvd\n- Address: 1425 N Crescent Heights Blvd, West Hollywood, CA 90046\n- Primary URL: https://www.elementweho.com/\n- Management company: Moss & Company\n- Recommended status: research_complete\n- Last updated: 2026-03-22\n\n## Scorecard\n- Quiet: 3 (low, evidence count 1)\n- Management: 3 (low, evidence count 1)\n- Amenity: 4 (medium, evidence count 2)\n- Community stability: 3 (low, evidence count 1)\n- Location fit: 5\n- Pricing transparency: 3\n\n## Risks\n- Structural noise risk: unknown\n- Location noise risk: medium\n- Security risk: low\n- Pricing risk: medium\n\n## Evidence summary\n- [official] Official materials and the repo note support package concierge, controlled access, pool, gym, garage parking, and pets welcome. Source: Element WeHo official site (https://www.elementweho.com/). Note: Current official materials support package concierge, controlled access, pool, gym, garage parking, and pet-friendly terms.\n- [review] Apartments.com and Zillow both continue to show in-unit washer/dryer and active inventory. Source: Apartments.com (https://www.apartments.com/element-weho-west-hollywood-ca/wn8k8ek/). Note: Third-party listings show active inventory and in-unit washer/dryer.\n\n## Open questions\n- Verify postal code, rooftop presence, and exact package-handling process after hours. Confirm EV charging and rooftop access or equivalent outdoor workspace amenity.\n\n## Notes\nResearch complete, but still evidence-thin. West Hollywood fit is strong and the essentials largely appear present, yet EV charging, rooftop utility, and after-hours package handling remain unresolved in visible public materials."
+}

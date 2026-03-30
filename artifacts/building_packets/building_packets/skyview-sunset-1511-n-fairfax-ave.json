@@ -1,0 +1,62 @@
+{
+  "building_row": {
+    "building_id": "skyview-sunset-1511-n-fairfax-ave",
+    "management_company": "SRG Residential",
+    "quiet_score": "3",
+    "quiet_confidence": "low",
+    "quiet_evidence_count": "1",
+    "management_score": "3",
+    "management_confidence": "low",
+    "management_evidence_count": "1",
+    "amenity_score": "4",
+    "amenity_confidence": "medium",
+    "amenity_evidence_count": "2",
+    "community_stability_score": "3",
+    "community_stability_confidence": "low",
+    "community_stability_evidence_count": "1",
+    "location_fit_score": "4",
+    "pricing_transparency_score": "3",
+    "approval_speed_business_days": "",
+    "structural_noise_risk": "unknown",
+    "location_noise_risk": "high",
+    "security_risk": "low",
+    "pricing_risk": "medium",
+    "status": "research_complete",
+    "review_scan_done": "yes",
+    "deep_research_done": "yes",
+    "open_questions": "Verify whether there is a real gym, whether any units face Sunset/Fairfax noise, and whether hot tub is the only water amenity.",
+    "notes": "Research complete, but not yet advanced. The building checks several operational boxes on paper, yet review depth is effectively nonexistent and the Sunset/Fairfax location creates an obvious external-noise question.",
+    "last_updated": "2026-03-22"
+  },
+  "evidence_rows": [
+    {
+      "evidence_id": "",
+      "scope_type": "building",
+      "scope_id": "skyview-sunset-1511-n-fairfax-ave",
+      "criterion": "amenities",
+      "claim": "The official site notes digital package reception, gated access, EV charging, covered parking, and a rooftop sky deck with hot tub.",
+      "source_type": "official",
+      "source_name": "Skyview Sunset official site",
+      "source_url": "https://www.skyviewsunset.com/",
+      "retrieved_date": "2026-03-22",
+      "evidence_class": "confirmed",
+      "sentiment": "positive",
+      "quote_or_note": "Current official materials support package reception, gated access, EV charging, covered parking, and rooftop sky-deck amenities."
+    },
+    {
+      "evidence_id": "",
+      "scope_type": "building",
+      "scope_id": "skyview-sunset-1511-n-fairfax-ave",
+      "criterion": "management",
+      "claim": "Apartments.com currently shows no renter reviews, leaving operating quality under-documented.",
+      "source_type": "review",
+      "source_name": "Apartments.com",
+      "source_url": "https://www.apartments.com/skyview-sunset-los-angeles-ca/s011r94/",
+      "retrieved_date": "2026-03-22",
+      "evidence_class": "confirmed",
+      "sentiment": "neutral",
+      "quote_or_note": "The public profile stated there were no renter reviews yet."
+    }
+  ],
+  "packet_markdown": "# Skyview Sunset building packet\n\n## Snapshot\n- Building ID: skyview-sunset-1511-n-fairfax-ave\n- Address: 1511 N. Fairfax Ave, Los Angeles, CA 90046\n- Primary URL: https://www.skyviewsunset.com/\n- Management company: SRG Residential\n- Recommended status: research_complete\n- Last updated: 2026-03-22\n\n## Scorecard\n- Quiet: 3 (low, evidence count 1)\n- Management: 3 (low, evidence count 1)\n- Amenity: 4 (medium, evidence count 2)\n- Community stability: 3 (low, evidence count 1)\n- Location fit: 4\n- Pricing transparency: 3\n\n## Risks\n- Structural noise risk: unknown\n- Location noise risk: high\n- Security risk: low\n- Pricing risk: medium\n\n## Evidence summary\n- [official] The official site notes digital package reception, gated access, EV charging, covered parking, and a rooftop sky deck with hot tub. Source: Skyview Sunset official site (https://www.skyviewsunset.com/). Note: Current official materials support package reception, gated access, EV charging, covered parking, and rooftop sky-deck amenities.\n- [review] Apartments.com currently shows no renter reviews, leaving operating quality under-documented. Source: Apartments.com (https://www.apartments.com/skyview-sunset-los-angeles-ca/s011r94/). Note: The public profile stated there were no renter reviews yet.\n\n## Open questions\n- Verify whether there is a real gym, whether any units face Sunset/Fairfax noise, and whether hot tub is the only water amenity.\n\n## Notes\nResearch complete, but not yet advanced. The building checks several operational boxes on paper, yet review depth is effectively nonexistent and the Sunset/Fairfax location creates an obvious external-noise question."
+}
