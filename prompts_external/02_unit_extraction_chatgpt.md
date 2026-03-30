@@ -106,15 +106,17 @@ Every file uses this shape. Every value must be a string. No numbers, no nulls.
 ## Critical rules
 
 1. Every value is a string. No JSON numbers, no null. Use "" for unknown.
-2. Do not calculate net_effective_rent or true_monthly_cost — leave them out.
-3. Do not guess fees. Leave blank if undisclosed.
-4. "Available now" → today's date.
-5. Concession math: record total dollar savings and lease_term_months separately.
-6. One row per unit. Same floor plan at different prices = separate rows.
-7. unit_id format: {building_id}--{unit_number} with double dash.
-8. Do not include building-level facts (scores, management, amenity flags).
-9. Source preference: Official site > Apartments.com > Zillow.
-10. If a site blocks you, say so in notes rather than fabricating data.
+2. Numeric-like fields must be bare numeric strings only. No `$`, commas, text, or ranges. Examples: `3305`, `150`, `7048.50`.
+3. If a site only shows a range or bundled total monthly price and you cannot isolate the exact field value, leave that field blank and explain it in `notes`.
+4. Do not calculate net_effective_rent or true_monthly_cost — leave them out.
+5. Do not guess fees. Leave blank if undisclosed.
+6. "Available now" → today's date.
+7. Concession math: record total dollar savings and lease_term_months separately.
+8. One row per unit. Same floor plan at different prices = separate rows.
+9. unit_id format: {building_id}--{unit_number} with double dash.
+10. Do not include building-level facts (scores, management, amenity flags).
+11. Source preference: Official site > Apartments.com > Zillow.
+12. If a site blocks you, say so in notes rather than fabricating data.
 
 Take your time. Accuracy matters more than speed.
 ```

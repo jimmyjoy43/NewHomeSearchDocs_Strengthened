@@ -65,6 +65,8 @@ Return a single JSON object with this shape:
 
 ## Rules
 - Do not repeat building-level facts here unless they are unit-specific.
+- Numeric-like fields must use bare numeric strings only. No `$`, commas, or ranges. Examples: `3305`, `150`, `7048.50`.
+- If the source only shows a range or a bundled total monthly price and you cannot isolate the exact field value, leave that field blank and explain it in `notes`.
 - Do not guess utilities, deposit, or fees. Leave blank if unavailable.
 - If the listing says "available now," convert it to the current date.
 - Do not calculate `net_effective_rent` or `true_monthly_cost`; the repo scripts do that deterministically.
