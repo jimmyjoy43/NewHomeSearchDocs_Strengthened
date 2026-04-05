@@ -314,27 +314,69 @@ python scripts\validate_data.py
 
 ## Stage 4: Tours
 
-Before touring, confirm:
+Stage 4 is a local, human step. Use it to convert the best Stage 3 candidates into direct observations, concrete decisions, and updated unit/building state.
+
+Before scheduling a tour, confirm:
 
 1. The building is still a plausible candidate in `buildings.csv`.
 2. There are qualifying unit rows in `units.csv`.
 3. The building's open questions are written down.
+4. The exact unit you care about still exists in `units.csv`, or you are explicitly touring a comparable.
 
 Use:
 - [`docs/05_tour_questions.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/05_tour_questions.md)
 
 Capture:
 - tour observations in [`data/tours.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/tours.csv)
+- unit tour state in [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv)
+- any real decisions in [`data/decisions.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/decisions.csv)
+
+### Safe Stage 4 Run
+
+1. Pick the building and exact unit you want to tour from [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv).
+2. Before the tour, set that unit's `tour_status` to `scheduled` in [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv).
+3. Bring [`docs/05_tour_questions.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/05_tour_questions.md) and prioritize the unresolved `open_questions` already stored on the building row.
+4. Immediately after the tour, add a row to [`data/tours.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/tours.csv) with:
+   - `tour_id`
+   - `building_id`
+   - `unit_id` if the toured unit is known
+   - `tour_date`
+   - `tour_type`
+   - `leasing_agent`
+   - `approval_speed_business_days` if learned
+   - `first_impression_score`
+   - `noise_observation`
+   - `unit_condition`
+   - `common_area_condition`
+   - `staff_responsiveness`
+   - `questions_answered`
+   - `red_flags`
+   - `follow_up_needed`
+   - `notes`
+   - `last_updated`
+5. Update the corresponding unit row in [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv) to `tour_status = completed`, `skipped`, or `rejected`.
+6. Update the building row in [`data/buildings.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/buildings.csv) if the tour changed the building-level view:
+   - `status`
+   - `approval_speed_business_days`
+   - `open_questions`
+   - `notes`
+   - any score or risk field that now has materially better evidence
+7. Add a row to [`data/decisions.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/decisions.csv) if the tour produced a real decision such as `finalist`, `backup`, `hold`, or `reject`.
 
 After each tour:
 
 ```powershell
 python scripts\validate_data.py
-python scripts\compute_scores.py
 python scripts\generate_markdown_reports.py
 ```
 
-Only rerun `compute_scores.py` if you changed building-level scoring inputs.
+Only rerun `compute_scores.py` if you changed building-level scoring inputs in [`data/buildings.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/buildings.csv):
+
+```powershell
+python scripts\compute_scores.py
+python scripts\validate_data.py
+python scripts\generate_markdown_reports.py
+```
 
 ## Stage 5: Final Review
 
@@ -350,6 +392,8 @@ Use these local inputs:
 - [`data/tours.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/tours.csv)
 - [`data/decisions.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/decisions.csv)
 - [`research/*.json`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/research)
+- [`docs/02_neighborhood_breadth_scan.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/02_neighborhood_breadth_scan.md)
+- [`docs/10_unit_comparison.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/10_unit_comparison.md)
 
 The final review should produce:
 - a head-to-head comparison
@@ -359,6 +403,27 @@ The final review should produce:
 - one clear recommendation
 - the biggest remaining risk
 - the next 48 hours of actions
+
+### Safe Stage 5 Run
+
+1. Make sure Stage 3 and Stage 4 updates are already reflected in:
+   - [`data/buildings.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/buildings.csv)
+   - [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv)
+   - [`data/evidence.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/evidence.csv)
+   - [`data/tours.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/tours.csv)
+   - [`data/decisions.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/decisions.csv)
+2. Run:
+
+```powershell
+python scripts\compute_scores.py
+python scripts\validate_data.py
+python scripts\generate_markdown_reports.py
+```
+
+3. Open [`prompts/05_final_review.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/prompts/05_final_review.md) in your local analysis chat.
+4. Let the model derive finalists from current decisions and statuses unless you want to specify a short list manually.
+5. Ask for one recommendation, the biggest remaining risk, and the next 48 hours of actions.
+6. If the final review changes your actual decision state, write that back into [`data/decisions.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/decisions.csv) and regenerate docs again.
 
 ## Scoring
 
