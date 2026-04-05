@@ -244,19 +244,46 @@ Default mode: external ChatGPT with web search ON.
 Primary prompt:
 - [`prompts_external/03_building_research_chatgpt.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/prompts_external/03_building_research_chatgpt.md)
 
+Do not use [`prompts/03_building_research_json.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/prompts/03_building_research_json.md) for the external bulk Stage 3 run. That file is the focused single-building template.
+
 Attach:
 - [`data/buildings.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/buildings.csv)
+- [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv)
+- [`docs/01_project_brief.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/01_project_brief.md)
+- [`docs/06_management_red_flags.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/06_management_red_flags.md)
+- [`docs/08_move_timeline.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/08_move_timeline.md)
+- [`docs/09_scoring_rubric.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/09_scoring_rubric.md)
+- [`docs/11_legal_and_fair_housing.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/11_legal_and_fair_housing.md)
+- [`docs/12_research_methodology.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/12_research_methodology.md)
 
 Expected output per building:
 - `building_row`
 - `evidence_rows`
 - `packet_markdown`
 
-Store reviewed building payloads under [`research/`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/research). The canonical packet location for this workflow is `research\{building_id}.json`.
+Default Stage 3 target set:
+- start from `buildings.csv` rows where `status` is not `rejected`
+- skip `leased`
+- keep only building IDs that appear in `units.csv` with at least one real unit row
+- skip buildings whose only Stage 2 row is `unit_number = NONE`
 
-Ingest the reviewed payloads into canonical CSVs:
+Store reviewed building payloads under [`research/`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/research). The canonical packet location for this workflow is `research/{building_id}.json`.
+
+### Safe Stage 3 Run
+
+Use this sequence after Stage 2 has already been ingested into [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv):
+
+1. Review [`data/units.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/units.csv) or [`docs/10_unit_comparison.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/10_unit_comparison.md) to confirm the buildings with real qualifying units.
+2. Optionally update `status` in [`data/buildings.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/buildings.csv) before research if you already know a building should be skipped.
+3. Open a new external ChatGPT chat with web search enabled.
+4. Paste [`prompts_external/03_building_research_chatgpt.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/prompts_external/03_building_research_chatgpt.md) into the message body.
+5. Attach the current Stage 3 reference files listed above.
+6. Let ChatGPT process the filtered buildings one at a time and download each `{building_id}.json` file into [`research/`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/research).
+7. Also save the optional combined `all_buildings_research.json` file in [`research/`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/research) if ChatGPT produces it.
+8. Compile the downloaded research packets into the canonical payload files:
 
 ```powershell
+python scripts\build_stage3_payloads.py
 python scripts\upsert_json_into_csv.py data\buildings.csv payload_buildings.json building_id
 python scripts\upsert_json_into_csv.py data\evidence.csv payload_evidence.json evidence_id
 python scripts\compute_scores.py
@@ -264,9 +291,12 @@ python scripts\validate_data.py
 python scripts\generate_markdown_reports.py
 ```
 
+9. Review the updated [`data/buildings.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/buildings.csv), [`data/evidence.csv`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/data/evidence.csv), and [`docs/02_neighborhood_breadth_scan.md`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/docs/02_neighborhood_breadth_scan.md) before making tour decisions.
+
 Notes:
 - [`payload_buildings.json`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/payload_buildings.json) should contain only `building_row` objects.
 - [`payload_evidence.json`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/payload_evidence.json) should contain only flattened `evidence_rows`.
+- [`scripts/build_stage3_payloads.py`](c:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/scripts/build_stage3_payloads.py) generates those two payload files directly from `research/*.json` and sets `packet_path` automatically when it is blank.
 - `review_scan_done` and `deep_research_done` belong in `buildings.csv`, not in `evidence.csv`.
 
 ## Stage 3.5: Decision Pass

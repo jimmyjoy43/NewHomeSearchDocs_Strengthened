@@ -1,185 +1,150 @@
 # Stage 3 External Prompt: Deep Building Research (ChatGPT + Web Search)
 
 **Model:** o3 or o4-mini, heavy thinking, web search ON
-**Attach:** `data/buildings.csv`
+**Attach:** `data/buildings.csv`, `data/units.csv`, `docs/01_project_brief.md`, `docs/06_management_red_flags.md`, `docs/08_move_timeline.md`, `docs/09_scoring_rubric.md`, `docs/11_legal_and_fair_housing.md`, `docs/12_research_methodology.md`
 
 ---
 
 ## Prompt
 
 ```text
-# Task: Deep Building Research — 16 Active Apartment Candidates
+# Task: Deep building research for the current post-Stage-2 candidate set
 
-You are a meticulous real estate research analyst. For each of the 16 buildings
-below, conduct multi-source due diligence and produce a structured research
-payload.
+You are a meticulous real estate research analyst. I need you to conduct
+multi-source building-level due diligence for the buildings that remain viable
+after Stage 2 unit extraction.
 
-## CRITICAL: Output workflow
+## Target building set
 
-Process buildings ONE AT A TIME in the order listed. After each building:
+I'm attaching my current `buildings.csv` and `units.csv`.
+
+Derive the building list directly from those files instead of from a hard-coded
+list in this prompt.
+
+By default:
+- start from `buildings.csv` rows where `status` is NOT `rejected`
+- skip rows where `status` is `leased`
+- keep only building IDs that appear in `units.csv` with at least one row where
+  `unit_number` is NOT `NONE`
+- skip buildings whose only Stage 2 rows are `unit_number = "NONE"`
+
+If I explicitly tell you to include rejected buildings or no-unit buildings,
+follow that instruction.
+
+Process buildings in the order they appear in `buildings.csv` after filtering.
+
+Use each building's current `building_id`, `building_name`, `address`,
+`source_url`, `status`, `notes`, and current Stage 2 unit rows as the starting
+context for the research.
+
+## What Stage 2 means for Stage 3
+
+Before researching each building, review its current unit rows in `units.csv`.
+Use them to anchor:
+- current live pricing levels
+- which unit types are actually available
+- concessions or fee ambiguity
+- exact-unit versus floor-plan uncertainty
+- unit-specific noise or exposure questions to carry into `open_questions`
+
+Do NOT re-run full unit extraction. Stage 3 is about building-level diligence,
+decision risk, and tour readiness.
+
+## Research sequence per building
+
+1. Visit the official leasing site first.
+2. Check fee, parking, pet, package, and policy disclosures on official or
+   official-adjacent pages.
+3. Check Apartments.com and Zillow for consistency, reviews, and operational
+   complaints.
+4. Check Google reviews and/or Yelp for recurring lived-experience patterns.
+5. Search local news and public records for incidents, management changes,
+   construction, or enforcement issues.
+6. Search Reddit only as a low-trust supplemental source.
+7. Document conflicts explicitly and lower confidence instead of forcing a clean
+   score.
+
+## Output workflow
+
+Process buildings ONE AT A TIME. After each building:
 
 1. Write the JSON object to a file named `{building_id}.json` using your code tool.
 2. Provide a download link immediately.
 3. Print a status line:
-   ✅ [N/16] {building_name}
-      Status: {status} | Quiet: {score} ({confidence}) | Mgmt: {score} ({confidence})
-      Evidence rows: {count} | Hard stop: {yes/no}
-      📥 Download: [link]
+   `✅ [N/TOTAL] {building_name}: status={status} | quiet={quiet_score} ({quiet_confidence}) | management={management_score} ({management_confidence}) | evidence={count} | hard_stop={yes/no or inferred}`
 4. Proceed to the next building without waiting.
 
-After all 16:
-- Write `all_buildings_research.json` (JSON array of all 16 objects) and provide
-  its download link.
-- Print a summary table.
-
----
-
-## Input
-
-I'm attaching my buildings.csv. Process ONLY rows where status is NOT
-"rejected." Use each building's existing notes and open_questions columns as
-starting points.
-
-## Buildings to research (process in this order)
-
-| # | building_id | building_name | address | source_url |
-|---|---|---|---|---|
-| 1 | columbia-square-living-1550-n-el-centro-ave | Columbia Square Living | 1550 N El Centro Ave, LA 90028 | https://www.columbiasquareliving.com/ |
-| 2 | the-baxter-1818-n-cherokee-ave | The Baxter | 1818 N Cherokee Ave, LA 90028 | https://thebaxterhollywood.com/ |
-| 3 | skyview-sunset-1511-n-fairfax-ave | Skyview Sunset | 1511 N. Fairfax Ave, LA 90046 | https://www.skyviewsunset.com/ |
-| 4 | 7950-west-sunset-7950-w-sunset-blvd | 7950 West Sunset | 7950 W Sunset Blvd, LA 90046 | https://7950westsunset.com/ |
-| 5 | the-crown-8350-santa-monica-blvd | The Crown | 8350 Santa Monica Blvd, WeHo 90069 | https://thecrownweho.com/ |
-| 6 | element-weho-1425-n-crescent-heights-blvd | Element WeHo | 1425 N Crescent Heights Blvd, WeHo 90046 | https://www.elementweho.com/ |
-| 7 | aka-8500-sunset-8500-sunset-blvd | The Apartment Residences at AKA | 8500 Sunset Blvd, WeHo 90069 | https://www.8500sunsetapartments.com/ |
-| 8 | silhouette-apartments-1233-n-highland-ave | Silhouette Apartments | 1233 N Highland Ave, LA 90038 | https://silhouettela.com/ |
-| 9 | avalon-west-hollywood-7316-santa-monica-blvd | Avalon West Hollywood | 7316 Santa Monica Blvd, WeHo 90046 | https://www.avaloncommunities.com/california/west-hollywood-apartments/avalon-west-hollywood/ |
-| 10 | line-lofts-1737-n-las-palmas-ave | Line Lofts | 1737 N Las Palmas Ave, LA 90028 | https://www.thelinelofts.com/ |
-| 11 | the-charlie-weho-7617-santa-monica-blvd | The Charlie WeHo | 7617 Santa Monica Blvd, WeHo 90046 | https://thecharlieweho.com/ |
-| 12 | vantage-hollywood-1710-n-fuller-ave | Vantage Hollywood | 1710 N Fuller Ave, LA 90046 | https://www.equityapartments.com/los-angeles/west-hollywood/vantage-apartments |
-| 13 | hanover-hollywood-6200-w-sunset-blvd | Hanover Hollywood | 6200 W Sunset Blvd, LA 90028 | https://www.hanoverhollywood.com/ |
-| 14 | lumina-hollywood-1522-gordon-st | Lumina Hollywood | 1522 Gordon St, LA 90028 | https://luminahollywood.com/ |
-| 15 | el-centro-apartments-and-bungalows-6200-hollywood-blvd | El Centro Apartments & Bungalows | 6200 Hollywood Blvd, LA 90028 | https://www.elcentrohollywood.com/ |
-| 16 | the-avenue-hollywood-1619-n-la-brea-ave | The Avenue Hollywood | 1619 N La Brea Ave, LA 90028 | https://theavenuehollywood.com/ |
-
----
+After all buildings are complete:
+- write `all_buildings_research.json` as a JSON array of every building object
+- provide its download link
+- print a short summary table
 
 ## Search context
 
-Personal apartment search. Key priorities (in order):
-1. Quiet — sleep, work, daily peace. #1 deal-breaker.
-2. Management quality — responsive, transparent, human.
-3. Cat-friendly with reasonable pet terms.
-4. In-unit laundry, dishwasher, central AC.
-5. Secure packages, controlled access, decent parking.
+Use the attached project files as the source of truth for:
+- budget and stretch ceiling
+- current move window
+- essential amenities
+- management red flags
+- scoring rubric
+- fair-housing guardrails
+- evidence methodology
 
-Budget: $3,800–$5,328/month all-in. Move-in target: April 20, 2026.
+Do NOT use stale date or budget assumptions from older prompts.
 
-## Source hierarchy
+## Score and risk fields to produce
 
-Tier 1 (most trusted): Official leasing site, fee schedules, public property
-records, direct staff disclosures.
-Tier 2: Local news, reputable reporting, official complaints/enforcement.
-Tier 3: Google reviews, Yelp, Apartments.com, ApartmentRatings.
-Tier 4 (least trusted): Reddit, neighborhood groups, social media.
+Use the attached rubric for how to score these fields:
+- `quiet_score`
+- `management_score`
+- `amenity_score`
+- `community_stability_score`
+- `location_fit_score`
+- `pricing_transparency_score`
 
-Marketing copy = discovery tool, not trust signal.
+Confidence labels:
+- `high`
+- `medium`
+- `low`
+- `unknown`
 
-## Scoring rubric
+Risk fields:
+- `structural_noise_risk`
+- `location_noise_risk`
+- `security_risk`
+- `pricing_risk`
 
-### quiet_score (weight: 30%)
-- 5: Consistently quiet; no chronic source identified
-- 4: Minor tradeoffs, no daily disruption pattern
-- 3: Noticeable but likely manageable noise risk
-- 2: Recurring noise issue or risky exposure
-- 1: Severe or chronic noise problem
+## Hard-stop rules
 
-### management_score (weight: 25%)
-- 5: Fast, transparent, credible, well-staffed
-- 4: Generally strong with isolated friction
-- 3: Mixed but workable
-- 2: Repeated slow, evasive, or understaffed signals
-- 1: Operationally broken or untrustworthy
-
-### amenity_score (weight: 15%)
-- 5: All essentials + strong useful extras
-- 4: All essentials + some meaningful extras
-- 3: Essentials present, extras unremarkable
-- 2: One essential missing or seriously compromised
-- 1: Multiple essentials missing or unreliable
-
-### community_stability_score (weight: 15%)
-Measure ONLY operational signals: quiet-hours enforcement, short-term-rental
-presence, renewal patterns, turnover, resident complaints about common areas.
-NEVER use demographic language or protected-class proxies.
-- 5: Strong stable long-term operations
-- 4: Mostly stable, limited churn
-- 3: Mixed
-- 2: Frequent churn, party behavior, or hotel-like use
-- 1: Highly unstable occupancy
-
-### location_fit_score (weight: 10%)
-- 5: Excellent Hollywood/WeHo daily-routine fit
-- 4: Strong fit
-- 3: Acceptable but imperfect
-- 2: Material inconvenience
-- 1: Bad fit
-
-### pricing_transparency_score (weight: 5%)
-- 5: Fees and concessions clear, simple, stable
-- 4: Mostly clear
-- 3: Some ambiguity
-- 2: Repeated fee ambiguity or bait-and-switch risk
-- 1: Material pricing opacity
-
-### Confidence labels (one per scored category)
-- high: multiple credible sources or in-person verification
-- medium: credible but incomplete
-- low: thin evidence, mostly soft signals
-- unknown: not enough to score responsibly
-
-### Risk fields (one each)
-- structural_noise_risk: low | medium | high | unknown
-- location_noise_risk: low | medium | high | unknown
-- security_risk: low | medium | high | unknown
-- pricing_risk: low | medium | high | unknown
-
-## Hard-stop rules (auto-reject if ANY is true)
-- management_score <= 1 AND quiet_score <= 2
-- approval_speed_business_days > 7
-- security_risk = "high" with no compensating control
-- A required essential amenity is definitively missing
-
-## Management red flags to look for
-- Vague answers on fees, parking, or lease policies
-- Cannot show the exact unit
-- Pushes concessions while dodging building issues
-- Repeated evidence of ignored maintenance
-- Chronic noise, theft, elevator, or package failures
-- High staff turnover or disorganization
-- AI-only leasing contact with no human fallback
+Treat a building as effectively rejected if any of these are clearly true:
+- `management_score <= 1` AND `quiet_score <= 2`
+- `approval_speed_business_days > 7`
+- `security_risk = "high"` with no credible compensating control
+- a required essential amenity is definitively missing
 
 ## Evidence rules
-For each claim that could affect a scoring decision:
-- Record source URL, retrieval date, source type
-- Classify: confirmed | corroborated | anecdotal | inferred | unknown
-- Tag sentiment: positive | mixed | negative | neutral
-- Conflicts: document both sides, prefer newer + higher-credibility source,
-  lower confidence instead of forcing a score
+
+For every claim that could affect scoring or status:
+- record source URL
+- record retrieval date
+- record source type
+- classify evidence as `confirmed | corroborated | anecdotal | inferred | unknown`
+- tag sentiment as `positive | mixed | negative | neutral`
+
+Minimum 3 evidence rows per building. Aim for 4 to 6 diverse sources.
 
 ## Fair-housing guardrail
+
 Never use age, family status, race, religion, disability, sexual orientation,
-gender identity, or nationality as criteria or proxies. community_stability_score
-measures ONLY operational facts (turnover, enforcement, short-term rentals).
+gender identity, nationality, or any proxy for those traits.
 
-## Research sequence per building
-
-1. Visit official leasing site — amenities, fees, pet policy, parking, concessions
-2. Check Apartments.com — rating, review count, resident complaints
-3. Check Google reviews and/or Yelp — look for patterns not isolated reviews
-4. Search local news — management changes, construction, incidents
-5. Search Reddit (r/AskLosAngeles, r/LosAngeles) for the building name
-6. Document conflicting evidence on both sides; lower confidence
-7. Score only where you have evidence; use "" where you can't
+`community_stability_score` must measure only operational facts such as:
+- quiet-hours enforcement
+- turnover and renewal patterns
+- short-term-rental or furnished-stay presence
+- complaint handling
+- staffing stability
+- after-hours support
 
 ## JSON shape for each building file
 
@@ -210,7 +175,7 @@ measures ONLY operational facts (turnover, enforcement, short-term rentals).
     "review_scan_done": "yes",
     "deep_research_done": "yes",
     "open_questions": "what still needs in-person verification",
-    "notes": "key findings and any conflicts",
+    "notes": "key findings, conflicts, and why this status was chosen",
     "last_updated": "YYYY-MM-DD"
   },
   "evidence_rows": [
@@ -229,22 +194,21 @@ measures ONLY operational facts (turnover, enforcement, short-term rentals).
       "quote_or_note": "relevant excerpt or summary"
     }
   ],
-  "packet_markdown": "# {building_name} building packet\n\n## Snapshot\n- Building ID: ...\n- Address: ...\n- Primary URL: ...\n- Management company: ...\n- Recommended status: ...\n- Last updated: YYYY-MM-DD\n\n## Scorecard\n- Quiet: {score} ({confidence}, evidence count {n})\n- Management: ...\n- Amenity: ...\n- Community stability: ...\n- Location fit: ...\n- Pricing transparency: ...\n\n## Risks\n- Structural noise risk: ...\n- Location noise risk: ...\n- Security risk: ...\n- Pricing risk: ...\n\n## Evidence summary\n- [{source_type}] {claim}. Source: {name} ({url}). Note: {quote}\n...\n\n## Open questions\n- ...\n\n## Notes\n..."
+  "packet_markdown": "# {building_name} building packet\n\n## Snapshot\n- Building ID: ...\n- Address: ...\n- Primary URL: ...\n- Management company: ...\n- Recommended status: ...\n- Last updated: YYYY-MM-DD\n\n## Current Stage 2 Unit Context\n- Unit(s) reviewed: ...\n- Current pricing observed: ...\n- Immediate unit-specific open questions: ...\n\n## Scorecard\n- Quiet: {score} ({confidence}, evidence count {n})\n- Management: ...\n- Amenity: ...\n- Community stability: ...\n- Location fit: ...\n- Pricing transparency: ...\n\n## Risks\n- Structural noise risk: ...\n- Location noise risk: ...\n- Security risk: ...\n- Pricing risk: ...\n\n## Evidence summary\n- [{source_type}] {claim}. Source: {name} ({url}). Note: {quote}\n...\n\n## Open questions\n- ...\n\n## Notes\n..."
 }
 
 ## Critical rules
 
-1. All values are strings. No JSON numbers, no null. Use "" for unknown.
-2. Do not fabricate URLs. Only cite pages you actually found.
-3. Do not fabricate review counts or ratings.
-4. evidence_id format: {building_id}--ev-{seq}
-5. Status decisions:
-   - tour_candidate = encouraging enough to visit
-   - research_complete = gathered but not decisive
-   - rejected = hard stop or clearly disqualifying
-6. Minimum 3 evidence rows per building. Aim for 4–6 diverse sources.
-7. If a site blocks you, note that honestly rather than guessing.
-8. Do not stop between buildings. Process all 16 continuously.
+1. All values are strings. No JSON numbers, no null. Use `""` for unknown.
+2. Do not fabricate URLs, ratings, review counts, or fee disclosures.
+3. `evidence_id` format must be `{building_id}--ev-{seq}`.
+4. If sources conflict, record both sides and lower confidence.
+5. `tour_candidate` means encouraging enough to visit now.
+6. `research_complete` means researched but still unresolved or not yet strong enough to tour.
+7. `rejected` means hard stop or clearly disqualifying.
+8. If a site blocks you, say so honestly in `notes` and evidence.
+9. Do not stop between buildings. Process the full filtered set continuously.
+10. Use the attached move timeline and budget context rather than any stale assumptions.
 
-Take your time on each building. Accuracy matters more than speed.
+Take your time. Accuracy matters more than speed.
 ```

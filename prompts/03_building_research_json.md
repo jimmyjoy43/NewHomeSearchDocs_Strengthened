@@ -1,16 +1,23 @@
 # Stage 3 Prompt: Building Research (JSON + packet draft)
 
+> Single-building prompt.
+> Use this when you want to re-research one building locally or in a focused chat.
+> For the external multi-building Stage 3 run, use [`prompts_external/03_building_research_chatgpt.md`](C:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/prompts_external/03_building_research_chatgpt.md).
+
 Use this for the deeper diligence pass on a serious candidate.
 
 ## Context
 Read:
 - `README.md`
+- `docs/01_project_brief.md`
 - `docs/03_essential_amenities.md`
 - `docs/06_management_red_flags.md`
+- `docs/08_move_timeline.md`
 - `docs/09_scoring_rubric.md`
 - `docs/11_legal_and_fair_housing.md`
 - `docs/12_research_methodology.md`
 - `data/buildings.csv`
+- `data/units.csv`
 - `data/evidence.csv`
 - `data/decisions.csv`
 
@@ -22,9 +29,10 @@ Read:
 
 ## Task
 1. Gather evidence from multiple source tiers.
-2. Assign scores only where evidence supports them.
-3. Log durable claims as evidence rows.
-4. Draft a building packet.
+2. Review the current Stage 2 unit rows for this building before scoring it.
+3. Assign scores only where evidence supports them.
+4. Log durable claims as evidence rows.
+5. Draft a building packet.
 
 ## Output format
 Return a single JSON object with this exact top-level shape:
@@ -82,6 +90,7 @@ Return a single JSON object with this exact top-level shape:
 
 ## Rules
 - Use `community_stability_score`, not demographic language.
+- Use the current move timeline and Stage 2 unit context, not stale assumptions from older runs.
 - When evidence conflicts, lower confidence and explain the conflict in `notes` and `packet_markdown`.
 - If the building trips a hard stop, state that clearly in `notes`.
 - Do not fabricate URLs, dates, or evidence IDs.
