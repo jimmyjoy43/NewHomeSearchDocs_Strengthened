@@ -14,7 +14,8 @@
 - Secure package handling
 - Reliable maintenance
 - Controlled entry or similarly strong access control
-- Acceptable parking solution
+- Strong primary parking solution
+- Concierge, 24x7 security, or another real around-the-clock on-site human presence
 - Gym
 - Clean, well-maintained common areas
 - Responsive leasing and management team

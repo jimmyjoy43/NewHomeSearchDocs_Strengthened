@@ -9,12 +9,17 @@ Read these project files first:
 - `docs/03_essential_amenities.md`
 - `docs/04_nice_to_have_amenities.md`
 - `docs/06_management_red_flags.md`
+- `docs/08_move_timeline.md`
 - `docs/09_scoring_rubric.md`
+
+Optional only if you are continuing an existing run rather than restarting:
 - `data/buildings.csv`
 - `data/decisions.csv`
 
 Important:
 - Do not assume you can read a remote GitHub repo unless the contents were actually pasted or uploaded in the current workspace.
+- If this is a fresh restart, do not anchor on old candidates or old decisions.
+- Use the current budget, move window, and amenity criteria from the attached docs, not from stale CSV rows.
 - Use `unknown` rather than guessing.
 - Do not use demographic or protected-class proxies.
 

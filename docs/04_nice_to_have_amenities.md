@@ -6,7 +6,7 @@
 - Conference room
 - EV charging
 - Concierge or front desk
-- Strong guest parking
+- Guest parking
 - Good pet amenities
 - High-end appliances
 - Smart-home features

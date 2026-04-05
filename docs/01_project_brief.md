@@ -9,12 +9,13 @@ Find a new apartment in or near Hollywood / West Hollywood that preserves the co
 1. Quiet enough for sleep, work, and normal daily life.
 2. Reliable, human, non-chaotic leasing and maintenance operations.
 3. Stable building operations with low surprise risk.
-4. Strong amenity package.
-5. Cat-friendly terms.
-6. In-unit laundry.
-7. Secure package handling.
-8. Strong parking or a genuinely workable parking alternative.
-9. Clean, well-maintained common spaces.
+4. Strong primary parking that works as a daily default, not just as a fallback.
+5. Concierge, 24x7 security, or another real around-the-clock on-site human presence.
+6. Strong amenity package.
+7. Cat-friendly terms.
+8. In-unit laundry.
+9. Secure package handling.
+10. Clean, well-maintained common spaces.
 
 ## Geography
 

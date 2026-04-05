@@ -1,5 +1,9 @@
 # Stage 2 Prompt: Unit Extraction (JSON)
 
+> Legacy single-building prompt.
+> Do not use this for the external bulk Stage 2 run.
+> For the current external workflow, use [`prompts_external/02_unit_extraction_chatgpt.md`](C:/Users/joyj7/Source/NewHomeSearchDocs_Strengthened/prompts_external/02_unit_extraction_chatgpt.md), which derives the building list directly from `data/buildings.csv`.
+
 Use this after a building survives the breadth scan.
 
 ## Context
@@ -19,7 +23,8 @@ Read:
 ## Task
 Extract qualifying units from the listing.
 Filters:
-- 1 bedroom or larger
+- studio or 1 bedroom only
+- exclude 2 bedroom and larger units
 - realistically in budget
 - available soon enough for the current move window
 

@@ -1,6 +1,6 @@
 {
-  "search_anchor_date": "2026-03-21",
-  "target_move_in_date": "2026-04-20",
+  "search_anchor_date": "2026-04-05",
+  "target_move_in_date": "2026-04-15",
   "default_weights": {
     "quiet_score": 0.3,
     "management_score": 0.25,
