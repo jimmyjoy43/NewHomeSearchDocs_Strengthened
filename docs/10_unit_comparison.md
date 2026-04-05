@@ -23,6 +23,7 @@ _Last regenerated: 2026-03-30. Sorted by true monthly cost ascending._
 | The Baxter | 207 | 1 | 1 | 773 | $2,550 |  |  | 2026-03-25 |  | tour_candidate |
 | Hanover Hollywood | Main-710 | 1 | 1 | 758 | $2,562 |  |  | 2026-03-25 |  | research_complete |
 | Hanover Hollywood | Main-712 | 1 | 1 | 758 | $2,562 |  |  | 2026-03-25 |  | research_complete |
+| The Huxley | 317 | 1 | 1 | 767 | $2,619 |  |  | 2026-04-10 |  | research_complete |
 | El Centro Apartments & Bungalows | 2534 | 1 | 1 | 702 | $2,644 |  |  | 2026-03-25 |  | research_complete |
 | El Centro Apartments & Bungalows | 2536 | 1 | 1 | 702 | $2,644 |  |  | 2026-03-25 |  | research_complete |
 | El Centro Apartments & Bungalows | 1308 | 1 | 1 | 732 | $2,699 |  |  | 2026-03-25 |  | research_complete |
@@ -46,10 +47,12 @@ _Last regenerated: 2026-03-30. Sorted by true monthly cost ascending._
 | El Centro Apartments & Bungalows | 3313 | 2 | 2 | 1081 | $3,445 |  |  | 2026-03-25 |  | research_complete |
 | El Centro Apartments & Bungalows | 1300 | 1 | 1 | 968 | $3,569 |  |  | 2026-04-22 |  | research_complete |
 | 7950 West Sunset | 226 | 2 | 2 | 1097 | $3,595 |  |  | 2026-03-25 |  | research_complete |
+| The Huxley | 318 | 2 | 2 | 1053 | $3,727 |  |  | 2026-03-30 |  | research_complete |
 | El Centro Apartments & Bungalows | 2542 | 2 | 2 | 1097 | $3,734 |  |  | 2026-03-25 |  | research_complete |
 | El Centro Apartments & Bungalows | 2642 | 2 | 2 | 1097 | $3,909 |  |  | 2026-03-25 |  | research_complete |
 | Silhouette Apartments | 303 | 1 | 1 | 977 | $3,935 |  |  | 2026-03-25 |  | tour_candidate |
 | El Centro Apartments & Bungalows | 1407 | 2 | 2 | 1081 | $3,950 |  |  | 2026-03-25 |  | research_complete |
+| The Huxley | 334 | 2 | 2 | 1230 | $3,977 |  |  | 2026-03-30 |  | research_complete |
 | Element WeHo | 103 | 1 | 1 | 1050 | $3,995 |  |  | 2026-03-25 |  | research_complete |
 | The Baxter | 513 | 2 | 2 | 1249 | $4,050 |  |  | 2026-03-25 |  | tour_candidate |
 | El Centro Apartments & Bungalows | 1326 | 2 | 2 | 1170 | $4,099 |  |  | 2026-04-22 |  | research_complete |
@@ -72,6 +75,7 @@ _Last regenerated: 2026-03-30. Sorted by true monthly cost ascending._
 | Columbia Square Living | 2001 | 1 | 1 | 996 |  |  |  | 2026-04-22 |  | tour_candidate |
 | El Centro Apartments & Bungalows | 1439 | 1 | 1 | 808 |  |  |  | 2026-03-25 |  | research_complete |
 | El Centro Apartments & Bungalows | 1445 | 1 | 1 | 689 |  |  |  | 2026-03-25 |  | research_complete |
+| Empire at Fairfax | NONE |  |  |  |  |  |  |  |  | research_complete |
 | Silhouette Apartments | 102 | 2 | 2 | 1165 |  |  |  | 2026-03-25 |  | tour_candidate |
 | Silhouette Apartments | 104 | 2 | 2 | 1022 |  |  |  | 2026-03-25 |  | tour_candidate |
 | Silhouette Apartments | 106 | 2 | 2 | 1203 |  |  |  | 2026-03-25 |  | tour_candidate |
@@ -106,3 +110,9 @@ _Last regenerated: 2026-03-30. Sorted by true monthly cost ascending._
 | The Avenue Hollywood | 526 | 1 | 1.5 | 1138 |  |  |  | 2026-03-25 |  | tour_candidate |
 | The Avenue Hollywood | 626 | 1 | 1.5 | 1138 |  |  |  | 2026-03-25 |  | tour_candidate |
 | The Avenue Hollywood | 708 | 1 | 1 | 773 |  |  |  | 2026-03-25 |  | tour_candidate |
+| The Harper | NONE |  |  |  |  |  |  |  |  | rejected |
+| The Highland | 210 | 2 | 2 | 998 |  |  |  | 2026-03-30 |  | tour_candidate |
+| The Highland | 302 | 2 | 2 | 1287 |  |  |  | 2026-04-04 |  | tour_candidate |
+| The Highland | 424 | 2 | 2 | 998 |  |  |  | 2026-03-30 |  | tour_candidate |
+| The Highland | 510 | 2 | 2 | 998 |  |  |  | 2026-03-30 |  | tour_candidate |
+| The Highland | 514 | 1 | 1 | 667 |  |  |  | 2026-03-30 |  | tour_candidate |
